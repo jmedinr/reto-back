@@ -1,4 +1,9 @@
 package com.sofka.reto.application.repository;
 
-public class CreateCyclist {
+import com.sofka.reto.infraestructure.rest.dto.CyclistDTO;
+import reactor.core.publisher.Mono;
+
+import javax.validation.Valid;
+public interface CreateCyclist {
+    Mono<CyclistDTO> apply(@Valid CyclistDTO cyclistDT);
 }
