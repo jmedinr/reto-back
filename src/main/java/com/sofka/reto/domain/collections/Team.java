@@ -1,4 +1,4 @@
-package com.sofka.reto.collections;
+package com.sofka.reto.domain.collections;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
