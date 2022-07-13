@@ -8,7 +8,10 @@ import reactor.core.publisher.Mono;
 public interface CyclistRepository extends ReactiveCrudRepository<Cyclist, Integer> {
 
     Flux<Cyclist> findByName(String name);
+
     Mono<Cyclist> findByCyclistNumber(String cyclistNumber);
+
     Flux<Cyclist> findByCyclistTeam(String team);
+
     Flux<Cyclist> findByCyclistNationality(String nationality);
 }
