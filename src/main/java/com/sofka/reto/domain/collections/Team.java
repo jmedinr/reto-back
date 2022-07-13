@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Data
 @Document(collection = "team")
 public class Team {
@@ -21,14 +23,17 @@ public class Team {
 
     private String country;
 
+    private List<Cyclist> cyclists;
+
     public Team() {
     }
 
-    public Team(Integer id, String name, String code, String country) {
+    public Team(Integer id, String name, String code, String country, List<Cyclist> cyclists) {
         this.id = id;
         this.name = name;
         this.code = code;
         this.country = country;
+        this.cyclists = cyclists;
     }
 
     @Override
@@ -38,6 +43,7 @@ public class Team {
                 ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
                 ", country='" + country + '\'' +
+                ", cyclists=" + cyclists +
                 '}';
     }
 }

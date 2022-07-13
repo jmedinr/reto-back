@@ -23,6 +23,7 @@ public class Cyclist {
 
     private String nationality;
 
+
     public Cyclist() {
     }
 
