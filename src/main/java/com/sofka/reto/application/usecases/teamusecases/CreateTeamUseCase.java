@@ -27,7 +27,6 @@ public class CreateTeamUseCase implements CreateTeam {
         this.sequenceService = sequenceService;
     }
 
-
     @Override
     public Mono<TeamDTO> appy(TeamDTO teamDTO) {
         return sequenceService.getSequenceNumber(SEQUENCE_TEAM)

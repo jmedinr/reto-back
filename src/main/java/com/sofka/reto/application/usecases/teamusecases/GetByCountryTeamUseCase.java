@@ -8,23 +8,23 @@ import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 @Service
 @Validated
-public class GetTeamUseCase implements Supplier<Flux<TeamDTO>> {
+public class GetByCountryTeamUseCase implements Function<String, Flux<TeamDTO>> {
 
     private final TeamRepository teamRepository;
     private final TeamMapper teamMapper;
 
-    public GetTeamUseCase(TeamRepository teamRepository, TeamMapper teamMapper) {
+    public GetByCountryTeamUseCase(TeamRepository teamRepository, TeamMapper teamMapper) {
         this.teamRepository = teamRepository;
         this.teamMapper = teamMapper;
     }
 
     @Override
-    public Flux<TeamDTO> get() {
-        return teamRepository.findAll()
+    public Flux<TeamDTO> apply(String country) {
+        return teamRepository.findByCountry(country)
                 .map(teamMapper.teamToTeamDTO());
     }
 }
