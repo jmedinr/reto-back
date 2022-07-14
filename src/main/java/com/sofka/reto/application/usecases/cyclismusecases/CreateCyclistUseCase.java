@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
-import static com.sofka.reto.domain.collections.Team.SEQUENCE_TEAM;
+import static com.sofka.reto.domain.collections.Cyclist.SEQUENCE_CYCLIST;
 
 @Service
 @Validated
@@ -30,7 +30,7 @@ public class CreateCyclistUseCase implements CreateCyclist {
 
     @Override
     public Mono<CyclistDTO> apply(CyclistDTO cyclistDTO) {
-        return sequenceService.getSequenceNumber(SEQUENCE_TEAM)
+        return sequenceService.getSequenceNumber(SEQUENCE_CYCLIST)
                 .flatMap(id -> {
                     cyclistDTO.setId(id.intValue());
                     return cyclistRepository

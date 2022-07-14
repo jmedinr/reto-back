@@ -8,25 +8,25 @@ import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 @Service
 @Validated
-public class GetCyclistUseCase implements Supplier<Flux<CyclistDTO>> {
+public class GetByCyclistTeamUseCase implements Function<String, Flux<CyclistDTO>> {
 
     private final CyclistRepository cyclistRepository;
 
     private final CyclistMapper cyclistMapper;
 
-    public GetCyclistUseCase(CyclistRepository cyclistRepository, CyclistMapper cyclistMapper) {
+    public GetByCyclistTeamUseCase(CyclistRepository cyclistRepository, CyclistMapper cyclistMapper) {
         this.cyclistRepository = cyclistRepository;
         this.cyclistMapper = cyclistMapper;
     }
 
     @Override
-    public Flux<CyclistDTO> get() {
-        return cyclistRepository.findAll()
+    public Flux<CyclistDTO> apply(String team) {
+        return cyclistRepository.findByTeam(team)
                 .map(cyclistMapper.cyclistToCyclistDTO());
     }
-
 }
