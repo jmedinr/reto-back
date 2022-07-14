@@ -11,7 +11,7 @@ public interface CyclistRepository extends ReactiveCrudRepository<Cyclist, Integ
 
     Mono<Cyclist> findByCyclistNumber(String cyclistNumber);
 
-    Flux<Cyclist> findByCyclistTeam(String team);
+    Flux<Cyclist> findByTeam(String team);
 
-    Flux<Cyclist> findByCyclistNationality(String nationality);
+    Flux<Cyclist> findByNationality(String nationality);
 }

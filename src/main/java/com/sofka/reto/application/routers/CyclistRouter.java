@@ -45,7 +45,7 @@ public class CyclistRouter {
                                     parameters = {
                                             @Parameter(in = ParameterIn.PATH, name = "cyclist", description = "Cyclist")}
                             )),
-                    @RouterOperation(path = "/getCyclistsById/{cyclistId}",
+                    @RouterOperation(path = "/getCyclistsById/{id}",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
                             method = RequestMethod.GET,
                             beanClass = GetByIdCyclistUseCase.class,
@@ -58,7 +58,22 @@ public class CyclistRouter {
                                             @ApiResponse(responseCode = "400", description = "Bad Request"),
                                             @ApiResponse(responseCode = "404", description = "Not Found")},
                                     parameters = {
-                                            @Parameter(in = ParameterIn.PATH, name = "cyclistId", description = "Cyclist Id")})
+                                            @Parameter(in = ParameterIn.PATH, name = "id", description = "Cyclist Id")})
+                    ),
+                    @RouterOperation(path = "/getCyclistsByName/{name}",
+                            produces = {MediaType.APPLICATION_JSON_VALUE},
+                            method = RequestMethod.GET,
+                            beanClass = GetByCyclistNameUseCase.class,
+                            beanMethod = "apply",
+                            operation = @Operation(operationId = "getCyclistByName",
+                                    responses = {
+                                            @ApiResponse(responseCode = "200", description = "OK",
+                                                    content = @Content(schema = @Schema(implementation = CyclistDTO.class))),
+                                            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+                                            @ApiResponse(responseCode = "400", description = "Bad Request"),
+                                            @ApiResponse(responseCode = "404", description = "Not Found")},
+                                    parameters = {
+                                            @Parameter(in = ParameterIn.PATH, name = "name", description = "Cyclist Name")})
                     ),
                     @RouterOperation(path = "/getCyclistsByNumber/{cyclistNumber}",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
@@ -75,7 +90,7 @@ public class CyclistRouter {
                                     parameters = {
                                             @Parameter(in = ParameterIn.PATH, name = "cyclistNumber", description = "Cyclist Number")})
                     ),
-                    @RouterOperation(path = "/getCyclistsByTeam/{cyclistTeam}",
+                    @RouterOperation(path = "/getCyclistsByTeam/{team}",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
                             method = RequestMethod.GET,
                             beanClass = GetByCyclistTeamUseCase.class,
@@ -88,9 +103,9 @@ public class CyclistRouter {
                                             @ApiResponse(responseCode = "400", description = "Bad Request"),
                                             @ApiResponse(responseCode = "404", description = "Not Found")},
                                     parameters = {
-                                            @Parameter(in = ParameterIn.PATH, name = "cyclistTeam", description = "Cyclist Team")})
+                                            @Parameter(in = ParameterIn.PATH, name = "team", description = "Cyclist Team")})
                     ),
-                    @RouterOperation(path = "/getCyclistsByNationality/{cyclistNationality}",
+                    @RouterOperation(path = "/getCyclistsByNationality/{nationality}",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
                             method = RequestMethod.GET,
                             beanClass = GetByCyclistTeamUseCase.class,
@@ -103,7 +118,7 @@ public class CyclistRouter {
                                             @ApiResponse(responseCode = "400", description = "Bad Request"),
                                             @ApiResponse(responseCode = "404", description = "Not Found")},
                                     parameters = {
-                                            @Parameter(in = ParameterIn.PATH, name = "cyclistNationality", description = "Cyclist Nationality")})
+                                            @Parameter(in = ParameterIn.PATH, name = "nationality", description = "Cyclist Nationality")})
                     ),
                     @RouterOperation(path = "/createCyclist",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
@@ -131,7 +146,7 @@ public class CyclistRouter {
                                             @ApiResponse(responseCode = "400", description = "Bad Request"),
                                             @ApiResponse(responseCode = "404", description = "Not Found")})
                     ),
-                    @RouterOperation(path = "/deleteCyclist/{cyclistId}",
+                    @RouterOperation(path = "/deleteCyclist/{id}",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
                             method = RequestMethod.DELETE,
                             beanClass = DeleteCyclistUseCase.class,
@@ -157,21 +172,25 @@ public class CyclistRouter {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(getCyclistUseCase.get(), CyclistDTO.class))
                 )
-                .andRoute(RequestPredicates.GET("/getCyclistsById/{cyclistId}"), request -> ServerResponse.ok()
+                .andRoute(RequestPredicates.GET("/getCyclistsById/{id}"), request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(getByIdCyclistUseCase.apply(request.pathVariable("cyclistId")), CyclistDTO.class))
+                        .body(BodyInserters.fromPublisher(getByIdCyclistUseCase.apply(request.pathVariable("id")), CyclistDTO.class))
+                )
+                .andRoute(RequestPredicates.GET("/getCyclistsByName/{name}"), request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(getByIdCyclistUseCase.apply(request.pathVariable("name")), CyclistDTO.class))
                 )
                 .andRoute(RequestPredicates.GET("/getCyclistsByNumber/{cyclistNumber}"), request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(getByCyclistNumberUseCase.apply(request.pathVariable("cyclistNumber")), CyclistDTO.class))
                 )
-                .andRoute(RequestPredicates.GET("/getCyclistsByTeam/{cyclistTeam}"), request -> ServerResponse.ok()
+                .andRoute(RequestPredicates.GET("/getCyclistsByTeam/{team}"), request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(getByCyclistTeamUseCase.apply(request.pathVariable("cyclistTeam")), CyclistDTO.class))
+                        .body(BodyInserters.fromPublisher(getByCyclistTeamUseCase.apply(request.pathVariable("team")), CyclistDTO.class))
                 )
-                .andRoute(RequestPredicates.GET("/getCyclistsByNationality/{cyclistNationality}"), request -> ServerResponse.ok()
+                .andRoute(RequestPredicates.GET("/getCyclistsByNationality/{nationality}"), request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(getByCyclistNationalityUseCase.apply(request.pathVariable("cyclistNationality")), CyclistDTO.class))
+                        .body(BodyInserters.fromPublisher(getByCyclistNationalityUseCase.apply(request.pathVariable("nationality")), CyclistDTO.class))
                 )
                 .andRoute(RequestPredicates.POST("/createCyclist").and(accept(MediaType.APPLICATION_JSON)),
                         request -> request.bodyToMono(CyclistDTO.class).flatMap(
@@ -181,9 +200,9 @@ public class CyclistRouter {
                                                 .bodyValue(result))
                         )
                 )
-                .andRoute(RequestPredicates.DELETE("/deleteCyclist/{cyclistId}").and(accept(MediaType.APPLICATION_JSON)),  request -> ServerResponse.accepted()
+                .andRoute(RequestPredicates.DELETE("/deleteCyclist/{id}").and(accept(MediaType.APPLICATION_JSON)),  request -> ServerResponse.accepted()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(deleteCyclistUseCase.apply(request.pathVariable("cyclistId")), Void.class))
+                        .body(BodyInserters.fromPublisher(deleteCyclistUseCase.apply(request.pathVariable("id")), Void.class))
                 )
                 .andRoute(RequestPredicates.PUT("/updateCyclist").and(accept(MediaType.APPLICATION_JSON)), request -> request.bodyToMono(CyclistDTO.class)
                         .flatMap(cyclistDTO -> updateCyclistUseCase.apply(cyclistDTO)

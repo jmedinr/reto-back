@@ -6,12 +6,13 @@ import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
 import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
-
+@Service
 public class SequenceGeneratorService {
 
     @Autowired

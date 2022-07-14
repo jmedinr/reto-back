@@ -6,5 +6,5 @@ import reactor.core.publisher.Mono;
 import javax.validation.Valid;
 
 public interface CreateCyclist {
-    Mono<CyclistDTO> apply(@Valid CyclistDTO cyclistDT);
+    Mono<CyclistDTO> apply(@Valid CyclistDTO cyclistDTO);
 }

@@ -44,7 +44,7 @@ public class TeamRouter {
                                     parameters = {
                                             @Parameter(in = ParameterIn.PATH, name = "team", description = "Team")}
                             )),
-                    @RouterOperation(path = "/getTeamsById/{teamId}",
+                    @RouterOperation(path = "/getTeamsById/{id}",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
                             method = RequestMethod.GET,
                             beanClass = GetByIdTeamUseCase.class,
@@ -57,9 +57,9 @@ public class TeamRouter {
                                             @ApiResponse(responseCode = "400", description = "Bad Request"),
                                             @ApiResponse(responseCode = "404", description = "Not Found")},
                                     parameters = {
-                                            @Parameter(in = ParameterIn.PATH, name = "teamId", description = "Team Id")})
+                                            @Parameter(in = ParameterIn.PATH, name = "id", description = "Team Id")})
                     ),
-                    @RouterOperation(path = "/getTeamsByName/{teamName}",
+                    @RouterOperation(path = "/getTeamsByName/{name}",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
                             method = RequestMethod.GET,
                             beanClass = GetByNameTeamUseCase.class,
@@ -72,9 +72,9 @@ public class TeamRouter {
                                             @ApiResponse(responseCode = "400", description = "Bad Request"),
                                             @ApiResponse(responseCode = "404", description = "Not Found")},
                                     parameters = {
-                                            @Parameter(in = ParameterIn.PATH, name = "teamName", description = "Team Name")})
+                                            @Parameter(in = ParameterIn.PATH, name = "name", description = "Team Name")})
                     ),
-                    @RouterOperation(path = "/getTeamByCode/{codeTeam}",
+                    @RouterOperation(path = "/getTeamByCode/{code}",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
                             method = RequestMethod.GET,
                             beanClass = GetByCodeTeamUseCase.class,
@@ -87,9 +87,9 @@ public class TeamRouter {
                                             @ApiResponse(responseCode = "400", description = "Bad Request"),
                                             @ApiResponse(responseCode = "404", description = "Not Found")},
                                     parameters = {
-                                            @Parameter(in = ParameterIn.PATH, name = "codeTeam", description = "Code Team")})
+                                            @Parameter(in = ParameterIn.PATH, name = "code", description = "Code Team")})
                     ),
-                    @RouterOperation(path = "/getTeamByCountry/{teamCountry}",
+                    @RouterOperation(path = "/getTeamByCountry/{country}",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
                             method = RequestMethod.GET,
                             beanClass = GetByCountryTeamUseCase.class,
@@ -102,7 +102,7 @@ public class TeamRouter {
                                             @ApiResponse(responseCode = "400", description = "Bad Request"),
                                             @ApiResponse(responseCode = "404", description = "Not Found")},
                                     parameters = {
-                                            @Parameter(in = ParameterIn.PATH, name = "teamCountry", description = "Team Country")})
+                                            @Parameter(in = ParameterIn.PATH, name = "country", description = "Team Country")})
                     ),
                     @RouterOperation(path = "/createTeam",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
@@ -130,7 +130,7 @@ public class TeamRouter {
                                             @ApiResponse(responseCode = "400", description = "Bad Request"),
                                             @ApiResponse(responseCode = "404", description = "Not Found")})
                     ),
-                    @RouterOperation(path = "/deleteTeam/{teamId}",
+                    @RouterOperation(path = "/deleteTeam/{id}",
                             produces = {MediaType.APPLICATION_JSON_VALUE},
                             method = RequestMethod.DELETE,
                             beanClass = DeleteTeamUseCase.class,
@@ -155,21 +155,21 @@ public class TeamRouter {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(getTeamUseCase.get(), TeamDTO.class))
                 )
-                .andRoute(RequestPredicates.GET("/getTeamsById/{teamId}"), request -> ServerResponse.ok()
+                .andRoute(RequestPredicates.GET("/getTeamsById/{id}"), request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(getByIdTeamUseCase.apply(request.pathVariable("teamId")), TeamDTO.class))
+                        .body(BodyInserters.fromPublisher(getByIdTeamUseCase.apply(request.pathVariable("id")), TeamDTO.class))
                 )
-                .andRoute(RequestPredicates.GET("/getTeamsByName/{teamName}"), request -> ServerResponse.ok()
+                .andRoute(RequestPredicates.GET("/getTeamsByName/{name}"), request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(getByNameTeamUseCase.apply(request.pathVariable("teamName")), TeamDTO.class))
+                        .body(BodyInserters.fromPublisher(getByNameTeamUseCase.apply(request.pathVariable("name")), TeamDTO.class))
                 )
-                .andRoute(RequestPredicates.GET("/getTeamByCode/{codeTeam}"), request -> ServerResponse.ok()
+                .andRoute(RequestPredicates.GET("/getTeamByCode/{code}"), request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(getByCodeTeamUseCase.apply(request.pathVariable("codeTeam")), TeamDTO.class))
+                        .body(BodyInserters.fromPublisher(getByCodeTeamUseCase.apply(request.pathVariable("code")), TeamDTO.class))
                 )
-                .andRoute(RequestPredicates.GET("/getTeamByCountry/{teamCountry}"), request -> ServerResponse.ok()
+                .andRoute(RequestPredicates.GET("/getTeamByCountry/{country}"), request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(getByCountryTeamUseCase.apply(request.pathVariable("teamCountry")), TeamDTO.class))
+                        .body(BodyInserters.fromPublisher(getByCountryTeamUseCase.apply(request.pathVariable("country")), TeamDTO.class))
                 )
                 .andRoute(RequestPredicates.POST("/createTeam").and(accept(MediaType.APPLICATION_JSON)),
                         request -> request.bodyToMono(TeamDTO.class).flatMap(
@@ -179,9 +179,9 @@ public class TeamRouter {
                                                 .bodyValue(result))
                         )
                 )
-                .andRoute(RequestPredicates.DELETE("/deleteTeam/{teamId}").and(accept(MediaType.APPLICATION_JSON)),  request -> ServerResponse.accepted()
+                .andRoute(RequestPredicates.DELETE("/deleteTeam/{id}").and(accept(MediaType.APPLICATION_JSON)),  request -> ServerResponse.accepted()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(deleteTeamUseCase.apply(request.pathVariable("teamId")), Void.class))
+                        .body(BodyInserters.fromPublisher(deleteTeamUseCase.apply(request.pathVariable("id")), Void.class))
                 )
                 .andRoute(RequestPredicates.PUT("/updateTeam").and(accept(MediaType.APPLICATION_JSON)), request -> request.bodyToMono(TeamDTO.class)
                         .flatMap(teamDTO -> updateTeamUseCase.appy(teamDTO)

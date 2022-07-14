@@ -26,7 +26,7 @@ public class GetByCyclistTeamUseCase implements Function<String, Flux<CyclistDTO
 
     @Override
     public Flux<CyclistDTO> apply(String team) {
-        return cyclistRepository.findByCyclistTeam(team)
+        return cyclistRepository.findByTeam(team)
                 .map(cyclistMapper.cyclistToCyclistDTO());
     }
 }
