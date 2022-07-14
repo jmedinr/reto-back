@@ -9,7 +9,7 @@ import java.util.function.Function;
 @Component
 public class CyclistMapper {
 
-    public Function<CyclistDTO, Cyclist> cyclistDTOToCyclist() {
+    public Function<CyclistDTO, Cyclist> cyclistDTOToCyclist(Object o) {
         return cyclistDTO -> {
             Cyclist cyclist = new Cyclist();
             cyclist.setId(cyclistDTO.getId());
