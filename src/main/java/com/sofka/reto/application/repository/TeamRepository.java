@@ -7,9 +7,9 @@ import reactor.core.publisher.Mono;
 
 public interface TeamRepository extends ReactiveCrudRepository<Team, Integer> {
 
-    Mono<Team> findAllByName(String name);
+    Mono<Team> findByName(String name);
 
-    Mono<Team> findAllByCode(String code);
+    Mono<Team> findByCode(String code);
 
     Flux<Team> findByCountry(String country);
 }

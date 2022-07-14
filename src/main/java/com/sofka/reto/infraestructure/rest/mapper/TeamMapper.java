@@ -9,7 +9,7 @@ import java.util.function.Function;
 @Component
 public class TeamMapper {
 
-    public Function<TeamDTO, Team> teamDTOToTeam() {
+    public Function<TeamDTO, Team> teamDTOToTeam(Object o) {
         return teamDTO -> {
             Team team = new Team();
             team.setId(teamDTO.getId());
