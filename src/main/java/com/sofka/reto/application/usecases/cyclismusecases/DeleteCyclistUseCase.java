@@ -1,7 +1,6 @@
 package com.sofka.reto.application.usecases.cyclismusecases;
 
 import com.sofka.reto.application.repository.CyclistRepository;
-import com.sofka.reto.domain.collections.Cyclist;
 import com.sofka.reto.infraestructure.rest.mapper.CyclistMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

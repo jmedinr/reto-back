@@ -13,6 +13,11 @@ import java.util.Objects;
 
 import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
 
+/**
+ * @Service implementation of a configurable service for integers ids.
+ * @author juan.medina@sofka.com.co
+ * @version 1.0
+ */
 @Service
 public class SequenceGeneratorService {
 
@@ -20,9 +25,9 @@ public class SequenceGeneratorService {
     private ReactiveMongoOperations reactiveMongoOperations;
 
     public Mono<Integer> getSequenceNumber(String sequenceName) {
-        //get sequence no
+        //get sequence
         Query query = new Query(Criteria.where("id").is(sequenceName));
-        //update the sequence no
+        //update the sequence
         Update update = new Update().inc("seq", 1);
         //modify in document
         Mono<DbSequence> counter = reactiveMongoOperations

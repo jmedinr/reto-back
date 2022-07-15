@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 
 import java.util.function.Function;
+
 @Service
 @Validated
 public class GetByCyclistNameUseCase implements Function<String, Flux<CyclistDTO>> {

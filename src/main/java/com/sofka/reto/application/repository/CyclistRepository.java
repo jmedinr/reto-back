@@ -5,6 +5,11 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * @repository implementation of repository interface for Cyclists
+ * @author juan.medina@sofka.com.co
+ * @Version 1.0
+ */
 public interface CyclistRepository extends ReactiveCrudRepository<Cyclist, Integer> {
 
     Flux<Cyclist> findByName(String name);

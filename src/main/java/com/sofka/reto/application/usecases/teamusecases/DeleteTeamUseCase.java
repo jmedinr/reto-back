@@ -1,7 +1,6 @@
 package com.sofka.reto.application.usecases.teamusecases;
 
 import com.sofka.reto.application.repository.TeamRepository;
-import com.sofka.reto.domain.collections.Team;
 import com.sofka.reto.infraestructure.rest.mapper.TeamMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

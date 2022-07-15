@@ -1,6 +1,6 @@
 package com.sofka.reto.application.routers;
 
-import com.sofka.reto.application.usecases.cyclismusecases.*;
+import com.sofka.reto.application.usecases.cyclismusecases.UpdateCyclistUseCase;
 import com.sofka.reto.application.usecases.teamusecases.*;
 import com.sofka.reto.infraestructure.rest.dto.CyclistDTO;
 import com.sofka.reto.infraestructure.rest.dto.TeamDTO;
@@ -14,11 +14,8 @@ import org.springdoc.core.annotations.RouterOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-
 import org.springframework.web.reactive.function.BodyInserters;
-
 import org.springframework.web.reactive.function.server.RouterFunction;
-
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
