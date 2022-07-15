@@ -2,6 +2,9 @@
 # Reto Zona De Talentos Back
 # Tour De Francia
 
+## Autores ✒️
+* **Juan Diego Medina Rojas** - *Consultor De Desarrollo*
+
 ## Comenzando 🚀
 
 Clonar repositorio en tu dispositivo
@@ -88,7 +91,4 @@ Tener instalado intelliJ o IDE de preferencia, Java 11+, Maven, se utiliza image
 #### Obtener equipos por país
 * ![image](https://user-images.githubusercontent.com/59657015/179300212-62b15c31-49b1-4fe9-9603-a14b03663b58.png)
 
-
-## Autores ✒️
-* **Juan Diego Medina Rojas** - *Consultor De Desarrollo*
 
