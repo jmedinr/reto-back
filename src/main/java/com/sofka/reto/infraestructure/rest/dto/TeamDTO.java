@@ -29,7 +29,7 @@ public class TeamDTO {
     @NotBlank(message = "country is required")
     private String country;
 
-    @Length(min = 0, max = 7, message = "name length must be between 1 and 8 cyclists")
+    @Length(min = 1, max = 8, message = "name length must be between 1 and 8 cyclists")
     private List<Cyclist> cyclists;
 
     @Override
