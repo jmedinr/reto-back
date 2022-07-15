@@ -27,7 +27,6 @@ public class DeleteCyclistUseCase implements Function<String, Mono<Void>> {
     @Override
     public Mono<Void> apply(String id) {
         Objects.requireNonNull(id, "The project id is required");
-        Mono<Cyclist> cyclist = cyclistRepository.findById(Integer.parseInt(id));
-        return cyclist.flatMap(t -> cyclistRepository.deleteById(Integer.parseInt(id)));
+        return cyclistRepository.deleteById(Integer.parseInt(id));
     }
 }

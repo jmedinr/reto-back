@@ -5,7 +5,6 @@ import com.sofka.reto.infraestructure.rest.dto.TeamDTO;
 import com.sofka.reto.infraestructure.rest.mapper.TeamMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
@@ -21,7 +20,6 @@ public class GetByCodeTeamUseCase implements Function<String, Mono<TeamDTO>> {
         this.teamRepository = teamRepository;
         this.teamMapper = teamMapper;
     }
-
 
     @Override
     public Mono<TeamDTO> apply(String code) {

@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 import java.util.Objects;
 
 import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
+
 @Service
 public class SequenceGeneratorService {
 

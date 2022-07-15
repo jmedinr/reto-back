@@ -26,7 +26,6 @@ public class DeleteTeamUseCase implements Function<String, Mono<Void>> {
     @Override
     public Mono<Void> apply(String id) {
         Objects.requireNonNull(id, "The project id is required");
-        Mono<Team> team = teamRepository.findById(Integer.parseInt(id));
-        return team.flatMap(t -> teamRepository.deleteById(Integer.parseInt(id)));
+        return teamRepository.deleteById(Integer.parseInt(id));
     }
 }
